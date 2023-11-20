@@ -40,16 +40,20 @@ model Session {
     userId       String
     expires      DateTime
     user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@index([userId])
 }
 
 model User {
-    id            String    @id @default(cuid())
+    id            String     @id @default(cuid())
     name          String?
-    email         String?   @unique
+    email         String?    @unique
     emailVerified DateTime?
     image         String?
     accounts      Account[]
     sessions      Session[]
+    Job           Job[]
+    SavedJob      SavedJob[]
 }
 
 model VerificationToken {
@@ -58,4 +62,31 @@ model VerificationToken {
     expires    DateTime
 
     @@unique([identifier, token])
+}
+
+model Job {
+    id          String     @id @default(cuid())
+    title       String
+    description String
+    company     String
+    location    String
+    salary      Int
+    link        String
+    user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId      String
+    SavedJob    SavedJob[]
+
+    @@index([userId])
+}
+
+model SavedJob {
+    id     String @id @default(cuid())
+    job    Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+    jobId  String
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId String
+
+    @@unique([jobId, userId])
+    @@index([jobId])
+    @@index([userId])
 }
