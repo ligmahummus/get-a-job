@@ -1,5 +1,5 @@
 "use client";
-import { useState, type FormEvent, useEffect } from "react";
+import { useState, type FormEvent, useEffect, useRef } from "react";
 import Hero from "./hero";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -7,6 +7,7 @@ export default function HeroWithSearch() {
   const [searchQuery, setSearchQuery] = useState<string>("");
   const router = useRouter();
   const searchParams = useSearchParams();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   /**
    * Sets the search query from the url onload.
@@ -15,6 +16,8 @@ export default function HeroWithSearch() {
     const query = searchParams.get("q");
     if (query) {
       setSearchQuery(query);
+    } else {
+      router.replace("/");
     }
   }, []);
 
@@ -32,7 +35,15 @@ export default function HeroWithSearch() {
    */
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    if (
+      !searchQuery.trim() ||
+      searchQuery === searchParams.get("q") ||
+      searchQuery === ""
+    ) {
+      inputRef.current?.focus();
+    } else {
+      router.push(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
   };
 
   return (
@@ -43,6 +54,7 @@ export default function HeroWithSearch() {
         className="relative mx-auto flex w-[90%] -translate-y-1/2 flex-col sm:w-[80%] md:w-[50%] md:flex-row"
       >
         <input
+          ref={inputRef}
           value={searchQuery}
           onChange={handleChange}
           type="text"
