@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 
 import { TRPCReactProvider } from "~/trpc/react";
 import NavigationBar from "./_components/header/navigation-bar";
+import HeroWithSearch from "./_components/header/hero/hero-with-search";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,7 +28,10 @@ export default function RootLayout({
       <body className={`font-sans ${inter.variable}`}>
         <TRPCReactProvider cookies={cookies().toString()}>
           <NavigationBar />
-          {children}
+          <main className="mx-auto max-w-7xl space-y-8">{children}</main>
+          <footer className="mt-12 w-full p-6 text-center text-sm font-bold text-slate-900/30">
+            All Right Reserved &copy; 2023 - {new Date().getFullYear()}
+          </footer>
         </TRPCReactProvider>
       </body>
     </html>
