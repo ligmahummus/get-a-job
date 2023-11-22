@@ -32,6 +32,7 @@ model Account {
     user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
     @@unique([provider, providerAccountId])
+    @@index([userId])
 }
 
 model Session {
@@ -44,6 +45,25 @@ model Session {
     @@index([userId])
 }
 
+model Profile {
+    id                 String  @id @default(cuid())
+    displayName        String
+    allowNotifications Boolean
+    image              String
+    country            String
+    city               String
+    state              String
+    active             Boolean
+    field              String
+    bio                String
+    phone              String
+    showEmail          Boolean
+    user               User    @relation(fields: [userId], references: [id])
+    userId             String
+
+    @@unique([userId])
+}
+
 model User {
     id            String     @id @default(cuid())
     name          String?
@@ -52,8 +72,11 @@ model User {
     image         String?
     accounts      Account[]
     sessions      Session[]
+    profile       Profile?
     Job           Job[]
     SavedJob      SavedJob[]
+    blocked       Boolean    @default(false)
+    role          Role       @default(USER)
 }
 
 model VerificationToken {
@@ -80,13 +103,16 @@ model Job {
 }
 
 model SavedJob {
-    id     String @id @default(cuid())
-    job    Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
-    jobId  String
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String
+    id    String @id @default(cuid())
+    job   Job    @relation(fields: [jobId], references: [id], onDelete: Cascade)
+    jobId String
+    user  User[]
 
-    @@unique([jobId, userId])
+    @@unique([jobId])
     @@index([jobId])
-    @@index([userId])
+}
+
+enum Role {
+    ADMIN
+    USER
 }
