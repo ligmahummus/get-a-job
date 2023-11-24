@@ -3,11 +3,14 @@ import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
+  Session,
 } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
+
+export type UserRole = "USER" | "ADMIN";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -19,15 +22,17 @@ declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
       id: string;
-      // ...other properties
-      // role: UserRole;
+      blocked: boolean;
+      role: UserRole;
+      profile: string;
     } & DefaultSession["user"];
   }
 
-  // interface User {
-  //   // ...other properties
-  //   // role: UserRole;
-  // }
+  interface User {
+    blocked: boolean;
+    profile: string;
+    role: UserRole;
+  }
 }
 
 /**
@@ -37,13 +42,39 @@ declare module "next-auth" {
  */
 export const authOptions: NextAuthOptions = {
   callbacks: {
-    session: ({ session, user }) => ({
-      ...session,
-      user: {
-        ...session.user,
-        id: user.id,
-      },
-    }),
+    session: async ({ session, user }) => {
+      const profileId =
+        user.name?.toLowerCase().replace(/\s/g, "-") +
+        "-" +
+        user.id.slice(user.id.length - 7, user.id.length);
+
+      try {
+        await db.profile.upsert({
+          where: { userId: user.id },
+          update: { lastSeen: new Date() },
+          create: {
+            slug: profileId,
+            userId: user.id,
+            displayName: user.name ?? "John Doe",
+            lastSeen: new Date(),
+            image: user.image,
+          },
+        });
+      } catch (error) {
+        throw new Error(`Failed to update profile: ${JSON.stringify(error)}`);
+      }
+
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          blocked: user.blocked,
+          role: user.role,
+          profile: profileId,
+          id: user.id,
+        },
+      };
+    },
   },
   adapter: PrismaAdapter(db),
   providers: [

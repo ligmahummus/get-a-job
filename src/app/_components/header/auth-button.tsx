@@ -19,7 +19,7 @@ export function Login() {
  */
 export function Logout({ name, id }: ILogout) {
   return (
-    <Link className="space-x-2" href={`/user/${id}`}>
+    <Link className="space-x-2" href={`/profile/${id}`}>
       <span>{name}, </span>
       <button onClick={() => signOut()}>Logout</button>
     </Link>

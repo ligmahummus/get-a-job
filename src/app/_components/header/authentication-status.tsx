@@ -8,7 +8,7 @@ import { Login, Logout } from "./auth-button";
 export default async function AuthenticationStatus() {
   const session = await getServerAuthSession();
   return session?.user ? (
-    <Logout name={session.user.name ?? "John Doe"} id={session.user.id} />
+    <Logout name={session.user.name ?? ""} id={session.user.profile} />
   ) : (
     <Login />
   );

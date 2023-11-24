@@ -3,7 +3,7 @@ import banner from "../../../../../public/hero-banner.jpg";
 export default function Hero() {
   return (
     <section
-      className="h-[340px] overflow-hidden rounded-xl bg-gray-800 text-white md:rounded-2xl lg:rounded-3xl"
+      className="h-[340px] w-auto overflow-hidden rounded-xl bg-gray-800 text-white md:rounded-2xl lg:rounded-3xl"
       style={{
         backgroundImage: `url(${banner.src})`,
         backgroundSize: "cover",
