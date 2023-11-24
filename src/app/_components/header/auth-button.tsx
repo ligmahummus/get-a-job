@@ -12,14 +12,11 @@ export function Login() {
 
 /**
  * Logout button that manages the termination of the session
- * @param {Object} props
- * @property {String} props.name - The name of the user
- * @property {String} props.id - The id of the user
  * @returns JSX.Element
  */
-export function Logout({ name, id }: ILogout) {
+export function Logout({ name }: ILogout) {
   return (
-    <Link className="space-x-2" href={`/profile/${id}`}>
+    <Link className="space-x-2" href={"/myaccount"}>
       <span>{name}, </span>
       <button onClick={() => signOut()}>Logout</button>
     </Link>
@@ -28,5 +25,4 @@ export function Logout({ name, id }: ILogout) {
 
 interface ILogout {
   name: string;
-  id: string;
 }

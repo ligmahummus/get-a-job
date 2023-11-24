@@ -1,19 +1,7 @@
-import { notFound } from "next/navigation";
-import ProfileHeader from "~/app/_components/profile/profile-header";
-import { api } from "~/trpc/server";
+"use client";
 
-export default async function UserProfile({
-  params: { profileSlug },
-}: IUserProfile) {
-  const profile = await api.profile.getProfileBySlug.query(
-    decodeURIComponent(profileSlug),
-  );
-  if (!profile) return notFound();
-  return (
-    <section id="page">
-      <ProfileHeader name={profile.displayName} />
-    </section>
-  );
+export default function UserProfile({ params: { profileSlug } }: IUserProfile) {
+  return <section id="page"></section>;
 }
 
 interface IUserProfile {

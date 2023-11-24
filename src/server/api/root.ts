@@ -1,5 +1,5 @@
 import { createTRPCRouter } from "~/server/api/trpc";
-import profileRouter from "./routers/profile-router";
+import accountRouter from "./routers/account-router";
 
 /**
  * This is the primary router for your server.
@@ -8,9 +8,9 @@ import profileRouter from "./routers/profile-router";
  */
 export const appRouter = createTRPCRouter({
   // Public prodcedures
-  profile: profileRouter,
-  // 'Me' procedures - (must be logged in && target record owned by me)
-  // editProfile:
+
+  // Protected procedures
+  account: accountRouter,
 });
 
 // export type definition of API
