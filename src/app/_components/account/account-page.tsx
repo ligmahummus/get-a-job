@@ -98,6 +98,7 @@ export default function AccountPage({ id }: IAccountPage) {
           <ul className="flex flex-col gap-4">
             {Object.keys(SectionType).map((key) => (
               <li
+                key={key}
                 className={`duration-300 ease-in-out hover:text-slate-700 ${
                   SectionType[key as keyof typeof SectionType] === sectionKey
                     ? "font-bold"
