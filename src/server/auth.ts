@@ -51,13 +51,14 @@ export const authOptions: NextAuthOptions = {
       try {
         await db.profile.upsert({
           where: { userId: user.id },
-          update: { lastSeen: new Date() },
+          update: {
+            lastSeen: new Date().toISOString(),
+          },
           create: {
             slug: profileId,
             userId: user.id,
             displayName: user.name ?? "John Doe",
-            lastSeen: new Date(),
-            image: user.image,
+            image: user.image ?? "",
           },
         });
       } catch (error) {
