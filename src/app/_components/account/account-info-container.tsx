@@ -33,6 +33,7 @@ export default function AccountInfoContainer({
           <article className="grid grid-flow-row grid-cols-2 gap-12 p-6">
             {section.fields.map((field) => (
               <div
+                key={field.key}
                 className={`space-y-2 ${
                   field.type === "textarea" ? "col-span-2" : ""
                 }`}
