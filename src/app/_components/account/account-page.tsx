@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 
 export default function AccountPage({ id }: IAccountPage) {
+  const [open, setOpen] = useState<boolean>(false);
   const [sectionKey, setSectionKey] = useState<SectionType>(
     SectionType.PERSONAL,
   );
@@ -22,8 +23,6 @@ export default function AccountPage({ id }: IAccountPage) {
       );
     }
   }, [page]);
-
-  console.log(sectionKey);
 
   const sections: {
     [key in SectionType]?: Section;
@@ -90,34 +89,71 @@ export default function AccountPage({ id }: IAccountPage) {
   if (account.isLoading) return <AccountPageLoadingComponent />;
   if (account.error ?? !account.data) router.replace("/");
 
+  const toggle = () => {
+    setOpen(!open);
+  };
+
   return (
     <>
       <AccountHeader name={account.data!.displayName} />
-      <div className="flex p-8">
-        <aside className="min-w-[20%]">
-          <ul className="flex flex-col gap-4">
-            {Object.keys(SectionType).map((key) => (
-              <li
-                key={key}
-                className={`duration-300 ease-in-out hover:text-slate-700 ${
-                  SectionType[key as keyof typeof SectionType] === sectionKey
-                    ? "font-bold"
-                    : ""
-                }`}
-              >
-                <Link href={`/myaccount?page=${key.toLowerCase()}`}>
-                  {SectionType[key as keyof typeof SectionType]}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </aside>
+      <div className="flex justify-center p-4">
+        <button
+          onClick={toggle}
+          className="w-max rounded-xl bg-slate-800 px-4 py-2 font-bold text-white"
+        >
+          Open Menu
+        </button>
+      </div>
+      <div className="flex md:p-8">
+        <SideMenuMobile toggle={toggle} open={open} sectionKey={sectionKey} />
         <AccountInfoContainer
           section={sections[sectionKey]!}
           account={account.data!}
         />
       </div>
     </>
+  );
+}
+
+function SideMenuMobile({
+  sectionKey,
+  open,
+  toggle,
+}: {
+  sectionKey: SectionType;
+  open: boolean;
+  toggle: () => void;
+}) {
+  return (
+    <aside
+      className={`fixed bottom-0 ${
+        open ? "left-0 right-0" : "-left-[100vw] right-[100vw]"
+      } top-0 flex h-screen w-screen min-w-[20%] flex-col items-center justify-center bg-white text-2xl duration-300 ease-in-out`}
+    >
+      <SettingMenu sectionKey={sectionKey} />
+      <button onClick={toggle}>Close</button>
+    </aside>
+  );
+}
+
+function SettingMenu({ sectionKey }: { sectionKey: SectionType }) {
+  return (
+    <ul className="flex flex-col gap-4">
+      {Object.keys(SectionType).map((key) => (
+        <li
+          key={key}
+          className={`duration-300 ease-in-out hover:text-slate-700 ${
+            SectionType[key as keyof typeof SectionType] === sectionKey
+              ? "font-bold"
+              : ""
+          }`}
+        >
+          <Link href={`/myaccount?page=${key.toLowerCase()}`}>
+            {SectionType[key as keyof typeof SectionType]}
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
 
