@@ -30,12 +30,12 @@ export default function AccountInfoContainer({
           <h1 className="border-b-2 border-b-slate-800/10 text-lg font-bold md:text-2xl lg:text-3xl">
             {section.title}
           </h1>
-          <article className="grid grid-flow-row grid-cols-2 gap-12 p-6">
+          <article className="grid grid-flow-row grid-cols-1 gap-12 p-6 md:grid-cols-2">
             {section.fields.map((field) => (
               <div
                 key={field.key}
                 className={`space-y-2 ${
-                  field.type === "textarea" ? "col-span-2" : ""
+                  field.type === "textarea" ? "md:first-line:col-span-2" : ""
                 }`}
               >
                 <label className="font-bold" htmlFor={field.key}>

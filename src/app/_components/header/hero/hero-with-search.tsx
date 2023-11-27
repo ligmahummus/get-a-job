@@ -59,11 +59,11 @@ export default function HeroWithSearch() {
           onChange={handleChange}
           type="text"
           placeholder="What job are you looking for?"
-          className="w-full rounded-bl-none rounded-tl-xl rounded-tr-xl bg-gradient-to-b from-slate-50 to-slate-200 px-4 py-2 text-[1em] text-xl font-bold shadow-lg focus:outline-slate-200 md:rounded-bl-xl md:rounded-br-none md:rounded-tl-xl md:rounded-tr-none md:text-2xl"
+          className="w-full rounded-bl-none rounded-tl-xl rounded-tr-xl bg-gradient-to-b from-slate-50 to-slate-200 px-4 py-2 text-[1em] text-xl font-bold shadow-lg focus:outline-slate-200 md:rounded-bl-xl md:rounded-br-none md:rounded-tl-xl md:rounded-tr-none md:text-xl"
         />
         <button
           type="submit"
-          className="md:text-md rounded-bl-xl rounded-br-xl bg-gradient-to-l from-slate-700 to-slate-800 px-4 py-2 text-lg font-bold text-white duration-300 ease-in-out hover:bg-pink-700 md:rounded-bl-none md:rounded-br-xl md:rounded-tr-xl"
+          className="md:text-md rounded-bl-xl rounded-br-xl bg-gradient-to-l from-slate-700 to-slate-800 px-4 py-2 text-lg font-bold text-white duration-300 ease-in-out md:rounded-bl-none md:rounded-br-xl md:rounded-tr-xl"
         >
           Search
         </button>
