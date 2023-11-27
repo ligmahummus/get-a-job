@@ -116,5 +116,6 @@ model SavedJob {
 
 enum Role {
     ADMIN
+    RECRUITER
     USER
 }

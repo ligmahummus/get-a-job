@@ -10,7 +10,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
 
-export type UserRole = "USER" | "ADMIN";
+export type UserRole = "USER" | "ADMIN" | "RECRUITER";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
