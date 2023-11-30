@@ -1,7 +1,6 @@
 "use client";
 import { transitions, positions, Provider as AlertProvider } from "react-alert";
 import AlertTemplate from "./alert-template";
-import "react-alert-template-mui";
 
 // optional configuration
 const options = {
