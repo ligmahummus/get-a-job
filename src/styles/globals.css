@@ -5,3 +5,7 @@
 #page {
     @apply p-2 md:p-0;
 }
+
+.std__header {
+    @apply text-slate-800;
+}
