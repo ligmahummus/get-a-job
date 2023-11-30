@@ -25,7 +25,10 @@ function SuitableFor() {
   return (
     <div className="mx-auto flex max-w-lg flex-wrap justify-center gap-3 text-[0.7rem] md:text-[1rem]">
       {suitableTags.map((tag) => (
-        <span className="rounded-full bg-slate-800/10 px-3 py-1 font-semibold text-slate-800">
+        <span
+          key={tag}
+          className="rounded-full bg-slate-800/10 px-3 py-1 font-semibold text-slate-800"
+        >
           {tag}
         </span>
       ))}
