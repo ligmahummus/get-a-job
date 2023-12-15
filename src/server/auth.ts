@@ -3,7 +3,6 @@ import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
-  Session,
 } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 

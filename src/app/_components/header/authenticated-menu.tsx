@@ -1,7 +1,7 @@
 "use client";
 import { signOut } from "next-auth/react";
 import { useState } from "react";
-import { UserRole } from "~/server/auth";
+import { type UserRole } from "~/server/auth";
 import { IoMdArrowDropdown } from "react-icons/io";
 import Link from "next/link";
 
@@ -97,6 +97,7 @@ function AccountMenu({ role, toggle }: IAccountMenu) {
             role="listitem"
             href={link.href}
             onClick={toggle}
+            key={link.href}
             className="cursor-pointer px-6 py-4 duration-150 ease-in-out hover:bg-gray-100"
           >
             {link.label}

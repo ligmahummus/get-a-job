@@ -1,6 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { UserRole } from "~/server/auth";
+import { type UserRole } from "~/server/auth";
 import AuthenticatedMenu from "./authenticated-menu";
 
 /**
