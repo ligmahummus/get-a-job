@@ -1,7 +1,7 @@
 "use client";
 
 export default function UserProfile({ params: { profileSlug } }: IUserProfile) {
-  return <section id="page"></section>;
+  return <section id="page">{profileSlug}</section>;
 }
 
 interface IUserProfile {

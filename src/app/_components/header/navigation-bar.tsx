@@ -3,6 +3,10 @@ import AuthenticationStatus from "./authentication-status";
 import Image from "next/image";
 import logo from "../../../../public/logo.png";
 
+/**
+ * Navigation bar for the application.
+ * @returns JSX.Element
+ */
 export default function NavigationBar() {
   return (
     <nav className="p-4">

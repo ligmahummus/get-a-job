@@ -2,6 +2,10 @@ import JobBody from "~/app/_components/job/post/job-body";
 import JobHeader from "~/app/_components/job/post/job-header";
 import JobPoster from "~/app/_components/job/post/job-poster";
 
+/**
+ * Job ad page.
+ * @returns JSX.Element
+ */
 export default function JobPage({ params: { jobSlug } }: IJobPage) {
   console.log(jobSlug);
   return (
