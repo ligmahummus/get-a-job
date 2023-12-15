@@ -3,7 +3,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { api } from "~/trpc/react";
 import AccountPageLoadingComponent from "./account-page-loading-component";
-import AccountHeader from "./account-header";
 import AccountInfoContainer from "./account-info-container";
 import { useEffect, useState } from "react";
 import Link from "next/link";

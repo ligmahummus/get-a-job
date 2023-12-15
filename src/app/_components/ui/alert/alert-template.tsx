@@ -1,5 +1,5 @@
 import React from "react";
-import { AlertTemplateProps } from "react-alert";
+import { type AlertTemplateProps } from "react-alert";
 
 const AlertDialog = ({ message, options }: AlertTemplateProps) => {
   const success = "bg-slate-800 text-white border-2 border-slate-900";

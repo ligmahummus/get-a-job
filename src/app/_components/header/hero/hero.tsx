@@ -1,5 +1,9 @@
 import banner from "../../../../../public/hero-banner.jpg";
 
+/**
+ * Main banner for the application homepage.
+ * @returns JSX.Element
+ */
 export default function Hero() {
   return (
     <section

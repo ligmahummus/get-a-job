@@ -1,6 +1,6 @@
 import { RedirectType, redirect } from "next/navigation";
-import AccountHeader from "~/app/_components/account/account-header";
 import AccountPage from "~/app/_components/account/account-page";
+import StyledTitle from "~/app/_components/ui/styled-title";
 import { getServerAuthSession } from "~/server/auth";
 
 export default async function MyAccountPage() {
@@ -9,10 +9,7 @@ export default async function MyAccountPage() {
 
   return (
     <section id="page">
-      <AccountHeader
-        name={session.user.name ?? ""}
-        image={session.user.image ?? ""}
-      />
+      <StyledTitle title="My Account" />
       <AccountPage id={session.user.id} />
     </section>
   );

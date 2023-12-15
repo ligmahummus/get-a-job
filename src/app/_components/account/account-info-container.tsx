@@ -1,7 +1,7 @@
 "use client";
 import { type RouterOutputs } from "~/trpc/shared";
 import { Section } from "./account-page";
-import { FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 
 export default function AccountInfoContainer({
   account,
